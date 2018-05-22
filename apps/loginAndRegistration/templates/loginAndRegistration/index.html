@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Travel Planner</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <style>
+    div {
+      display: inline-block;
+      vertical-align: text-top;
+      margin: 10px 20px;
+    }
+    .red {color: red;}
+    .green {color: green;}
+    html, body {
+    height: 100%;}
+    html {
+    display: table;
+    margin: auto;
+    }
+    body {
+        display: table-cell;
+    vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+  <h1>Login and Registration</h1>
+  <div>
+    <h2>Registration</h2>
+	 <form action="{% url 'login:register' %}" method='post'>
+         {% csrf_token%}
+    {% if messages %}
+      {% for message in messages %}
+          {% if 'first_name' in message.tags %}
+              <p class="red">{{message}}</p>
+          {% endif %}
+      {% endfor %}
+    {% endif %}
+
+    <label for="first_name">First Name:</label><br>
+    <input type="text" name="first_name" value="{{first_name}}">
+    <br>
+
+    {% if messages %}
+      {% for message in messages %}
+          {% if 'last_name' in message.tags %}
+              <p class="red">{{message}}</p>
+          {% endif %}
+      {% endfor %}
+    {% endif %}
+
+    <label for="last_name">Last Name:</label><br>
+    <input type="text" name="last_name" value="{{last_name}}">
+    <br>
+
+    {% if messages %}
+      {% for message in messages %}
+          {% if 'regemail' in message.tags %}
+              <p class="red">{{message}}</p>
+          {% endif %}
+      {% endfor %}
+    {% endif %}
+
+    <label for="email">Email:</label><br>
+    <input type="text" name="email" value="{{email}}">
+    <br>
+
+    {% if messages %}
+      {% for message in messages %}
+          {% if 'regpassword' in message.tags %}
+              <p class="red">{{message}}</p>
+          {% endif %}
+      {% endfor %}
+    {% endif %}
+
+    <label for="password">Password:</label><br>
+    <input type="password" name="password">
+    <br>
+
+    {% if messages %}
+      {% for message in messages %}
+          {% if 'confirmpassword' in message.tags %}
+              <p class="red">{{message}}</p>
+          {% endif %}
+      {% endfor %}
+    {% endif %}
+
+    <label for="confirm_password">Confirm Password:</label><br>
+    <input type="password" name="confirm_password">
+    <br>
+
+    <input type='submit' value='Register!'>
+    </form>
+  </div>
+
+  <div>
+    <h2>Login</h2>
+      <form action="{% url 'login:login' %}" method='post'>
+        {% csrf_token%}
+    {% if messages %}
+      {% for message in messages %}
+          {% if 'loginemail' in message.tags %}
+              <p class="red">{{message}}</p>
+          {% endif %}
+      {% endfor %}
+    {% endif %}
+
+        <label for="email">Email:</label><br>
+        <input type="text" name="email" value="{{email}}">
+        <br>
+
+    {% if messages %}
+      {% for message in messages %}
+          {% if 'loginpassword' in message.tags %}
+              <p class="red">{{message}}</p>
+          {% endif %}
+      {% endfor %}
+    {% endif %}
+
+        <label for="password">Password:</label><br>
+        <input type="password" name="password">
+        <br>
+        <input type='submit' value='Login!'>
+      </form>
+  </div>
+
+</body>
+</html>

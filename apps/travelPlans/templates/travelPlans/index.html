@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Travel Dashboard</title>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <style>
+    .flashes {color: green;}
+    .red {color: red;}
+    h4 {
+      display: inline-block;
+    }
+    .header {
+      min-width: 600px;
+	  float: right;
+    }
+    body {
+      margin: 10px 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+  <h4><a href="{% url 'login:logout' %}">Logout</a></h4>
+  </div>
+  <h1>Hello, {{first_name}}</h1>
+
+      {% if messages %}
+        {% for message in messages %}
+          {% if 'success' in message.tags %}
+            <p class="flashes">{{message}}</p>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+
+  <h3>Your Trip Schedules</h3>
+  <table class="w3-table-all w3-hoverable w3-card-4">
+    <tr>
+      <td>Destination</td>
+      <td>Travel Start Date</td>
+      <td>Travel End Date</td>
+      <td>Plan</td>
+    </tr>
+    {% for i in trips %}
+    <tr>
+      <td><a href="destination/{{i.id}}">{{i.destination}}</a></td>
+      <td>{{i.startdate}}</td>
+      <td>{{i.enddate}}</td>
+      <td>{{i.desc}}</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <h3>Other User's Travel Plans</h3>
+  <table class="w3-table-all w3-hoverable w3-card-4">
+    <tr>
+      <td>Name</td>
+      <td>Destination</td>
+      <td>Travel Start Date</td>
+      <td>Travel End Date</td>
+      <td>Do You Want To Join?</td>
+    </tr>
+    {% for i in others %}
+    <tr>
+      <td>{{i.traveler.first_name}} {{i.traveler.last_name}}</td>
+      <td><a href="destination/{{i.id}}">{{i.destination}}</a></td>
+      <td>{{i.startdate}}</td>
+      <td>{{i.enddate}}</td>
+      <td><a href="jointrip/{{i.id}}">Join</a></td>
+    </tr>
+    {% endfor %}
+  </table><br>
+
+  <a href="{% url 'travels:newtrip' %}">Add Travel Plan</a>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Destination Details</title>
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<style>
+    div {
+      display: inline-block;
+      vertical-align: text-top;
+      margin: 10px 30px;
+    }
+    .flashes {color: red;}
+    h4 {
+      display: inline-block;
+    }
+    .header {
+      min-width: 600px;
+	  float: right;
+    }
+  </style>
+</head>
+<body>
+	<div class="header">
+		<h4><a href="{% url 'travels:index' %}">Home</a></h4>
+    	<h4><a href="{% url 'login:logout' %}">Logout</a></h4>
+	</div><br>
+	<div>
+	<h2>{{trip.destination}}</h2>
+	<p>Planned By: {{trip.traveler.first_name}} {{trip.traveler.last_name}}</p>
+	<p>Description: {{trip.desc}}</p>
+	<p>Travel Date From: {{trip.startdate}}</p>
+	<p>Travel Date To: {{trip.enddate}}</p>
+
+	<h2>Other travelers joining the trip:</h2>
+	{% for i in others %}
+	<p>{{i.first_name}} {{i.last_name}}</p>
+	{% endfor %}
+	</div>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Add Plan</title>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <style>
+    div {
+      display: inline-block;
+      vertical-align: text-top;
+      margin: 10px 30px;
+    }
+    .flashes {color: red;}
+    h4 {
+      display: inline-block;
+    }
+    .header {
+      min-width: 600px;
+      float: right;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h4><a href="{% url 'travels:index' %}">Home</a> <a href="{% url 'login:logout' %}">Logout</a></h4>
+  </div><br>
+  <div class="">
+    <h2>Add a Trip</h2>
+	 <form action="{% url 'travels:createtrip' %}" method='post'>
+      {% csrf_token %}
+      {% if messages %}
+        {% for message in messages %}
+          {% if 'destination' in message.tags %}
+            <p class="flashes">{{message}}</p>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+
+    <label for="destination">Destination:</label><br>
+    <input type="text" name="destination">
+    <br>
+
+      {% if messages %}
+        {% for message in messages %}
+          {% if 'desc' in message.tags %}
+            <p class="flashes">{{message}}</p>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+
+    <label for="desc">Description:</label><br>
+    <input type="text" name="desc">
+    <br>
+
+       {% if messages %}
+        {% for message in messages %}
+          {% if 'startdate' in message.tags %}
+            <p class="flashes">{{message}}</p>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+
+    <label for="startdate">Travel Date From:</label><br>
+    <input type="date" name="startdate">
+    <br>
+
+      {% if messages %}
+        {% for message in messages %}
+          {% if 'enddate' in message.tags %}
+            <p class="flashes">{{message}}</p>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+
+    <label for="enddate">Travel Date To:</label><br>
+    <input type="date" name="enddate">
+    <br>
+
+    <input type='submit' value='Add'>
+    </form>
+  </div>
+</body>
+</html>
