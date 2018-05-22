@@ -9,7 +9,7 @@ def index(request):
     if 'session_id' in request.session:
         result=User.objects.UserSessionValidator(request.session['session_id'])
         if result:
-            return redirect(reverse('login:success'))
+            return redirect(reverse('travels:index'))
         else:
             request.session.clear()
     return render(request, 'loginAndRegistration/index.html')
