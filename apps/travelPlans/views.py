@@ -11,7 +11,7 @@ def index(request):
             this_user = User.objects.filter(session=request.session['session_id'])[0]
             context = {
                 'first_name': this_user.first_name,
-                'trips': travels.objects.filter(traveler=this_user) | this_user.joined_trips.all(),
+                'trips': (travels.objects.filter(traveler=this_user) | this_user.joined_trips.all()).distinct,
                 'others': travels.objects.exclude(traveler=this_user).exclude(id__in=[i.id for i in this_user.joined_trips.all()]).select_related('traveler')
             }
             return render(request, 'travelPlans/index.html', context)
