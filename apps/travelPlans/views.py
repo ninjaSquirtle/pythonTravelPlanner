@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from .models import *
 from ..loginAndRegistration.models import *
 from django.contrib import messages
